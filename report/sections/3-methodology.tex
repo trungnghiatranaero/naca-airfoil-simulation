@@ -1,0 +1,52 @@
+% ============================================================
+% METHODOLODY
+% ============================================================
+\section*{Methodology}
+
+% ----- Excel Graph (2D) -----
+
+\subsubsection*{Excel Graph (2D)}
+
+Microsoft Excel is one of the simplest tools for generating graphs and calculating tabulated data. 
+This approach is particularly useful for understanding preliminary concepts in aircraft design, especially wing profiles, 
+which are fundamental components of an airplane. 
+
+Using cosine spacing with 1000 points provides an efficient method for distributing coordinates along the chord. 
+The primary advantage of cosine spacing is its ability to increase the density of points in regions with high curvature, 
+thereby producing a smoother and more accurate airfoil representation.
+
+There are two commonly used cosine spacing methods:
+
+\begin{itemize}
+    \item[(1)] The $x$-coordinates are defined using a sequence of angles ranging from $0$ to $\displaystyle \frac{\pi}{2}$. 
+    This method concentrates more points near the leading edge, where the curvature is greatest, 
+    while fewer points are distributed near the trailing edge.
+    
+    \item[(2)] The $x$-coordinates are defined using angles ranging from $0$ to $\pi$. This method distributes points symmetrically, 
+    ensuring equal point density near both the leading edge and trailing edge. 
+    However, the points near the mid-chord region are more sparsely distributed compared to the edge regions.
+\end{itemize}
+
+Since 1000 points are sufficient to produce a smooth graphical representation, 
+both cosine spacing methods yield nearly identical results. 
+In this study, the first method is adopted.
+
+% ----- Airfoil Graphing -----
+
+\subsubsection*{Airfoil Graphing}
+
+For geometry-based thickness distributions, 
+including the NACA 4-digit, 5-digit, and their modified series, 
+the airfoil geometries are constructed using the analytical equations provided in the official NACA reports.
+However, for airfoils designed based on thin airfoil theory, 
+no explicit analytical thickness distributions are defined. 
+Due to the complexity of aerodynamic analysis and the requirement for advanced computational tools, 
+these airfoils are generated using available airfoil coordinate data. 
+The governing equations are then approximated using Lagrange interpolation.
+
+The geometric characteristics of airfoils vary significantly depending on changes in key parameters. 
+These geometric variations directly influence aerodynamic performance, particularly lift, drag, and moment coefficients during flight.
+
+In this study, 
+one geometric parameter of a given NACA airfoil is varied while all other parameters are held constant. 
+This approach allows for a clear observation of how individual parameters affect the airfoil shape.

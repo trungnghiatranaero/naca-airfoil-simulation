@@ -1,0 +1,152 @@
+% ============================================================
+% NUMERICAL ACCURACY ASESSMENT
+% ============================================================
+
+\section*{Numerical Accuracy Assessment}
+
+% ----------------------------------------------------------
+% Classical Thickness Distributions
+% ----------------------------------------------------------
+
+\subsection*{Scope of the Error Analysis}
+
+The present tool does not involve CFD or flow-field simulation.
+The geometry is generated from analytical NACA formulations and, in some cases,
+is reconstructed from tabulated coordinate data using polynomial interpolation.
+Therefore, the primary sources of numerical error arise from:
+
+\begin{enumerate}
+    \item Discretization error due to finite chordwise sampling.
+    \item Interpolation error from polynomial reconstruction.
+    \item Tabulated data approximation and rounding.
+\end{enumerate}
+
+Since the analytical NACA equations are available, 
+they are treated as the reference solution for validation purposes.
+
+% ----- Discretization Error -----
+
+\subsubsection*{Discretization Error}
+
+Let $y_{exact}(x)$ denote the analytical airfoil surface and
+$y_N(x)$ the discretized representation using $N$ chordwise points.
+
+The discretization error is evaluated using:
+\[
+E_{\infty}(N) = \max_{i} | y_N(x_i) - y_{exact}(x_i) |
+\]
+
+and the root-mean-square (RMS) error:
+\[
+E_{RMS}(N) =
+\sqrt{
+\frac{1}{N}
+\sum_{i=1}^{N}
+\left(
+y_N(x_i) - y_{exact}(x_i)
+\right)^2
+}
+\]
+
+A grid refinement study is performed by increasing
+$N = 50, 100, 200$.
+
+For smooth analytical airfoil functions,
+the discretization error is expected to decrease approximately with
+$\mathcal{O}(N^{-2})$ for sufficiently smooth regions.
+
+% ----- Effect of Node Distribution -----
+
+\subsubsection*{Effect of Node Distribution}
+
+Uniform spacing and cosine spacing are compared under identical $N$.
+
+Since airfoil curvature is highest near the leading edge, 
+uniform spacing under-resolves this region, 
+leading to locally amplified errors.
+
+Cosine spacing clusters nodes near $x=0$, 
+thus significantly reducing leading-edge geometric error.
+For typical NACA 4-digit profiles, 
+the maximum geometric deviation near the leading edge is expected to decrease by one order of magnitude when cosine spacing is used instead of uniform spacing at moderate resolution ($N \approx 100$).
+
+% ----- Interpolation Error -----
+
+\subsubsection*{Interpolation Error}
+
+When reconstructing geometry from tabulated data, 
+Lagrange polynomial interpolation of degree $n$ is applied.
+
+The interpolation error is theoretically given by:
+\[
+f(x) - P_n(x) =
+\frac{f^{(n+1)}(\xi)}{(n+1)!}
+\prod_{i=0}^{n}(x - x_i)
+\]
+
+for some $\xi$ in the interpolation interval.
+
+Since airfoil thickness and camber distributions are smooth functions, 
+the interpolation error remains small for moderate $n$.
+However, high-degree interpolation under uniform spacing may produce oscillations (Runge phenomenon).
+
+In practical implementation,
+interpolation is restricted to a moderate polynomial degree or applied locally to avoid instability.
+
+The expected interpolation error magnitude,
+for $n \leq 10$ and smooth tabulated data,
+is typically below $10^{-4}c$ in geometric coordinates.
+
+% ----- Tabulated Data Approximation -----
+
+\subsubsection*{Tabulated Data Approximation}
+
+Tabulated airfoil data are usually rounded to
+$4$--$5$ decimal places.
+This introduces a baseline numerical uncertainty
+on the order of $E_{table} \sim 10^{-5}c \text{ to } 10^{-4}c$, which represents the lower bound of achievable accuracy
+when reconstructing geometry from such data.
+
+% ----- Overall Expected Accuracy -----
+
+\subsubsection*{Overall Expected Accuracy}
+
+Combining discretization and interpolation effects,
+the total geometric error may be estimated as:
+\[
+E_{total} \approx
+E_{disc} + E_{interp} + E_{table}
+\]
+
+For typical configurations with $N \geq 100$ cosine-spaced nodes and a moderate interpolation degree, 
+the overall geometric deviation is expected to remain within $E_{total} \leq 10^{-4}c$, 
+corresponding to less than $0.01\%$ of the chord length.
+
+% ----- Acceptable Error and Adjustment Criteria -----
+
+\subsubsection*{Acceptable Error and Adjustment Criteria}
+
+Since the present tool is intended for geometric visualization,
+preliminary aerodynamic estimation,
+and educational or conceptual analysis,
+a geometric tolerance of $E_{tol} = 10^{-4}c$
+is considered acceptable.
+
+If the error exceeds this threshold,
+favorable adjustments are: 
+increase chordwise resolution, 
+use cosine spacing instead of uniform spacing, 
+reduce the interpolation degree or switch to spline interpolation, 
+refine tabulated input precision.
+
+% ----- Conclusion -----
+
+\subsubsection*{Conclusion}
+
+The dominant numerical error source in the present implementation
+is discretization near the leading edge.
+Cosine spacing effectively mitigates this issue.
+
+Under typical settings, the geometric error remains sufficiently small
+for engineering-level preliminary airfoil analysis.
+Further refinement is only necessary if high-fidelity CFD or structural analysis is to be performed using the generated geometry.
