@@ -103,6 +103,7 @@ The tool generates airfoil coordinates and visualizes the airfoil profile throug
 ![Excel simulation interface](readme_figures/tool_interface.png)
 
 ### Example Generated Airfoils
+| | | |
 |---|---|---|
 | <img src="readme_figures/naca0012_profile.png" width="250"> | <img src="readme_figures/naca2412_profile.png" width="250"> | <img src="readme_figures/naca4415_profile.png" width="250"> |
 | NACA 0012 | NACA 2412 | NACA 4415 |
