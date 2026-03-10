@@ -123,7 +123,9 @@ Future improvements of this project may include:
 
 ## Author
 **Nghia Tran**
+
 Physics student with interests in aerospace engineering, aerodynamics, and aircraft design.
+
 Github: https://github.com/trungnghiatranaero
 
 ## License
