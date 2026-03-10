@@ -3,9 +3,12 @@
 ![License](https://img.shields.io/badge/license-educational-green)
 
 <p align="center">
-<img src="readme_figures/naca2412_geometry.png" width="600">
+<img src="readme_figures/naca2412_geometry.png" width="800">
 </p>
+
+<p align="center">
 *Example airfoil geometry generated from the Excel simulation model* 
+</p>
 
 ## Overview
 This repository presents a geometric study of classical NACA airfoil families and an interactive simulation tool developed in Excel to visualize airfoil profiles. The project focuses on understanding the mathematical formulation and geometric characteristics of NACA airfoils and generating their corresponding shapes through parametric control.
@@ -100,17 +103,10 @@ The tool generates airfoil coordinates and visualizes the airfoil profile throug
 ![Excel simulation interface](readme_figures/tool_interface.png)
 
 ### Example Generated Airfoils
-<p align="center">
-  <img src="readme_figures/naca0012_profile.png" width="250">
-  <img src="readme_figures/naca2412_profile.png" width="250">
-  <img src="readme_figures/naca4415_profile.png" width="250">
-</p>
-
-<p align="center">
-NACA 0012 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-NACA 2412 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-NACA 4415
-</p>
+| | | |
+|---|---|---|
+| <img src="readme_figures/naca0012_profile.png" width="250"> | <img src="readme_figures/naca2412_profile.png" width="250"> | <img src="readme_figures/naca4415_profile.png" width="250"> |
+| NACA 0012 | NACA 2412 | NACA 4415 |
 
 ## Applications
 This project is intended for educational and exploratory purposes in:
